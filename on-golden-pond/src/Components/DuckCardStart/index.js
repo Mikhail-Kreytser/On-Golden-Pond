@@ -1,7 +1,6 @@
-import React from 'react';
-
 import {Col, CardPanel, Row, Button} from 'react-materialize'
 import icon from '../../Media/Icon.png'
+import React from 'react';
 
 class DuckCardStart extends React.Component {
   render() {
@@ -10,18 +9,20 @@ class DuckCardStart extends React.Component {
         <Col s={10} m={10} offset="m1">
           <CardPanel className="blue lighten-5 black-text">
             <Row style={{paddingTop:"30px"}}>
-              {this.props.button &&
-                <Col s={12} m={3}>
-                  <img src={icon} alt="" height="64" width="64"/>
-                  <Button className="btn-small" onClick={()=>{this.props.play(this.props.duck)}}>
-                    Play
-                  </Button>
-                </Col>
-                }
-              {!this.props.button &&
-                <Col s={12} m={3}>
-                  <img src={icon} alt="" height="100" width="100"/>
-                </Col>
+              { //This shows the play button
+                this.props.button &&
+                  <Col s={12} m={3}>
+                    <img src={icon} alt="" height="64" width="64"/>
+                    <Button className="btn-small" onClick={()=>{this.props.play(this.props.duck)}}>
+                      Play
+                    </Button>
+                  </Col>
+              }
+              {//This hides the play button
+                !this.props.button &&
+                  <Col s={12} m={3}>
+                    <img src={icon} alt="" height="100" width="100"/>
+                  </Col>
               }
               <Col s={12} m={6} style={{ textAlign:'center'}}>
                 <h5>

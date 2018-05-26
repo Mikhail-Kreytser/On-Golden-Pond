@@ -20,6 +20,7 @@ class DuckInput extends Component {
     this.handleEnter = this.handleEnter.bind(this);
   }
 
+  //Handles input change
   handleInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -30,6 +31,7 @@ class DuckInput extends Component {
     });
   }
 
+  //Handles Enter
   handleEnter(event){
     const duckInstructions = this.state.duckInstructions;
     const orientation = this.state.orientation;
@@ -72,10 +74,12 @@ class DuckInput extends Component {
             }
           }
           else{
+            //Error msg, No Instructions
             this.setState({duckInstructionsError: "Add Instructions"})
           }
 		    }
 		    else{
+          //Error msg, Bad coordinates
 		    	this.setState({
   					xError: (xInit >= 0 && xInit <= xMax) ? ""  : `0 <= X <= ${xMax}`,
             yError: (yInit >= 0 && yInit <= yMax) ? ""  : `0 <= Y <= ${yMax}`
@@ -83,6 +87,7 @@ class DuckInput extends Component {
 		    }
 		  } 
   		else {
+          //Error msg, No coordinates
   			this.setState({
   				xError: this.state.xInit ? ""  : "Please enter a number",
   				yError: this.state.yInit ? ""  : "Please enter a number"
@@ -97,6 +102,7 @@ class DuckInput extends Component {
 
     this.setState({duckInstructions: value.toUpperCase()})
 
+    //Uses regular expression to check input
     var pattern = /^[PSF]+$/;
     if(pattern.test(value.toUpperCase())){
       this.setState({duckInstructionsError: ""})
@@ -162,6 +168,9 @@ class DuckInput extends Component {
                     s={12} 
                   />
                 </Row>
+              <p>
+                Click enter to add duck to list
+              </p>
               </Col>
             </Row>
           </CardPanel>

@@ -16,6 +16,7 @@ class BoardSizeInput extends Component {
     this.handleEnter = this.handleEnter.bind(this);
   }
 
+  //Handles input change
   handleInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -25,9 +26,11 @@ class BoardSizeInput extends Component {
         [name]: value
     });
   }
+
+  //Handles Enter and Click
   handleEnter(event){
   	if (event.key === 'Enter' || event.type === 'click') {
-	  	//Check if a number is inputed
+	  	//Checks if a number is inputed
 	  	if (this.state.xMax && this.state.yMax ){
 		  	//Change to Int
 		  	var xMax = parseInt(this.state.xMax, 10);
@@ -39,9 +42,11 @@ class BoardSizeInput extends Component {
 					xError: "",
 					yError: ""
 				})
-		        this.props.submitBordSize({xMax, yMax});
+          //Posts the size of the board to the parent
+		      this.props.submitBordSize({xMax, yMax});
 		    }
 		    else{
+          //Error msg
 		    	this.setState({
 					xError: (xMax > 0 && xMax <= 25) ? ""  : "0 < X < 26",
 					yError: (yMax > 0 && yMax <= 25) ? ""  : "0 < Y < 26"
@@ -49,6 +54,7 @@ class BoardSizeInput extends Component {
 		    }
 		}
 		else {
+      //Error msg
 			this.setState({
 				xError: this.state.xMax ? ""  : "Please enter a number",
 				yError: this.state.yMax ? ""  : "Please enter a number"

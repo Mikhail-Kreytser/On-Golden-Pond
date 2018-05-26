@@ -1,20 +1,18 @@
-import React from 'react';
-
 import {Col, CardPanel, Row, Button} from 'react-materialize'
-import icon from '../../Media/Icon.png'
-
 import { computeMove } from '../Functions'
+import icon from '../../Media/Icon.png'
+import React from 'react'
 
 class DuckCardEnd extends React.Component {
   constructor(props){
     super(props);
-
     this.state={};
-    
   }
 
   componentDidMount(){
     this.setState(
+      
+      //Calculates the final position of the duck
       computeMove(
         this.props.xBound,
         this.props.yBound,
@@ -26,6 +24,8 @@ class DuckCardEnd extends React.Component {
     )
   }
   render() {
+
+    //Red background if duck fell off the grid
     var color = this.state.error ? "red lighten-5 black-text" : "blue lighten-5 black-text";
     return (
       <Row>

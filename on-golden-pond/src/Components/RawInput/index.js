@@ -122,6 +122,12 @@ class RawInput extends Component {
             <Row>
               <Button className="blue lighten-3 black-text" onClick={this.buttonClick} waves='light'>Submit Raw Input</Button>
             </Row>
+            <Row>
+              <p>
+                This input is very sensitive, raw data needs to be in the correct format.
+                Otherwise this form will not submit.
+              </p>
+            </Row>
           </CardPanel>
         </Col>
       </Row>

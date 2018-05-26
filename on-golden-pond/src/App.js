@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
-
-
-// import {Col, Card, CardPanel, Row, Input, Icon, Button} from 'react-materialize'
 import BoardSizeInput from './Components/BoardSizeInput';
 import DuckCardStart from './Components/DuckCardStart';
 import NextButton from './Components/NextButton';
 import DuckInput from './Components/DuckInput';
 import RawInput from './Components/RawInput';
 import Board from './Components/Board';
+import React, { Component } from 'react';
+import './App.css';
+
 
 class App extends Component {
   constructor(props){
@@ -16,24 +14,7 @@ class App extends Component {
     this.state = {
       showDuckInput: false,
       showSizeInput: true,
-      ducks: [
-      // {
-      //   duckInstructions:"FFFFSFFFFFF",
-      //   orientation:"N",
-      //   xInit:0,
-      //   yInit:0
-      // },{
-      //   duckInstructions:"PFPFPFPFF",
-      //   orientation:"N",
-      //   xInit:1,
-      //   yInit:2
-      // },{
-      //   duckInstructions:"FFSFFSFSSF",
-      //   orientation:"E",
-      //   xInit:3,
-      //   yInit:3
-      // }
-      ],
+      ducks: [],
       xMax: 0,
       yMax: 0,
 
@@ -44,9 +25,9 @@ class App extends Component {
     this.submitDuckList = this.submitDuckList.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
     this.submitDuck = this.submitDuck.bind(this);
-
   }
 
+  //Handles input change
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -57,6 +38,7 @@ class App extends Component {
     });
   }
 
+  //Sets the bounds for the grid. closes size input fields, opens duck input fields
   submitBordSize(data){
     this.setState({
       showSizeInput: false,
@@ -66,6 +48,7 @@ class App extends Component {
     })
   }
 
+  //Saves the list of ducks from raw data input, opens the grid
   submitDuckList(duckList,bounds){
     this.setState({
       showSizeInput: false,
@@ -76,6 +59,7 @@ class App extends Component {
     })
   }
 
+  //Adds a duck to the list
   submitDuck(duck){
     const ducks = this.state.ducks.concat(duck);
     this.setState({
@@ -83,6 +67,7 @@ class App extends Component {
     });
   }
 
+  //Closes duck input fields, closes size input fields, opens grid
   buttonClick(){
     this.setState({
       showSizeInput: false,
