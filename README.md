@@ -13,10 +13,10 @@ facing east. The duck's instructions follow the initial position. Duck one will 
 Duck two will follow this: FFSFFSFSSF. 'F' moves the duck forward, 'P' spins the duck 90 degrees toward 
 the left side,'S' spins the duck 90 degrees toward the right side.
 ```
-5 5  
-1 2 N  
-PFPFPFPFF  
-3 3 E  
+5 5
+1 2 N
+PFPFPFPFF
+3 3 E
 FFSFFSFSSF
 ```
 
