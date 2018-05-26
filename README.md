@@ -6,6 +6,7 @@ My app is currently live on heroku: https://on-golden-pond.herokuapp.com/
 Data can be manualy inputed with the provided prompts.
 
 Data can also be inputed in the form of raw data.
+<img src="https://github.com/Mikhail-Kreytser/On-Golden-Pond/blob/master/raw-input-demo.gif"/>
 
 **Ex:** This is a grid with (0,0) on the bottom left and (5,5) on the top right. There are two ducks. 
 The first duck's initial position is (1,2) facing North. The second duck's initial position is (3,3)
