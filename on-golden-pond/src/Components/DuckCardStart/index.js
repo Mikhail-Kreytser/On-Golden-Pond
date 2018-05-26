@@ -10,12 +10,19 @@ class DuckCardStart extends React.Component {
         <Col s={10} m={10} offset="m1">
           <CardPanel className="blue lighten-5 black-text">
             <Row style={{paddingTop:"30px"}}>
-              <Col s={12} m={3}>
-                <img src={icon} alt="" height="64" width="64"/>
-                <Button className="btn-small" onClick={()=>{this.props.play(this.props.duck)}}>
-                  Play
-                </Button>
-              </Col>
+              {this.props.button &&
+                <Col s={12} m={3}>
+                  <img src={icon} alt="" height="64" width="64"/>
+                  <Button className="btn-small" onClick={()=>{this.props.play(this.props.duck)}}>
+                    Play
+                  </Button>
+                </Col>
+                }
+              {!this.props.button &&
+                <Col s={12} m={3}>
+                  <img src={icon} alt="" height="100" width="100"/>
+                </Col>
+              }
               <Col s={12} m={6} style={{ textAlign:'center'}}>
                 <h5>
                   Initial Cordinates: ({this.props.duck.xInit},{this.props.duck.yInit})

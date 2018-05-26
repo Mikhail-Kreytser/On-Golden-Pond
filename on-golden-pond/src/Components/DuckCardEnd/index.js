@@ -35,7 +35,7 @@ class DuckCardEnd extends React.Component {
               <Col s={12} m={2}>
                 <img src={icon} alt="" height="100" width="100"/>
               </Col>
-              <Col s={12} m={6} style={{ textAlign:'center'}}>
+              <Col s={12} m={6} offset={this.state.error ? "" :"m2" }style={{ textAlign:'center'}}>
                 <h5>
                   End Cordinates: ({this.state.finalX},{this.state.finalY})
                 </h5>

@@ -133,7 +133,7 @@ class Board extends React.Component{
               Input
             </h2>
             {this.props.ducks.map((duck, index) =>{
-              return <DuckCardStart key={index} duck={duck} play={this.play}/>
+              return <DuckCardStart button={true} key={index} duck={duck} play={this.play}/>
             })}
           </Col>
           <Col s={12} l={6}>

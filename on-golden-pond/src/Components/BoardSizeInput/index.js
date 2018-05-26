@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Col, CardPanel, Row, Input} from 'react-materialize'
+import {Col, CardPanel, Row, Input, Button} from 'react-materialize'
 
 class BoardSizeInput extends Component {
 	constructor(props){
@@ -26,8 +26,7 @@ class BoardSizeInput extends Component {
     });
   }
   handleEnter(event){
-
-  	if (event.key === 'Enter') {
+  	if (event.key === 'Enter' || event.type === 'click') {
 	  	//Check if a number is inputed
 	  	if (this.state.xMax && this.state.yMax ){
 		  	//Change to Int
@@ -62,11 +61,19 @@ class BoardSizeInput extends Component {
       <Row>
         <Col s={12} m={6} offset="m3">
           <CardPanel className="blue lighten-5 black-text">
-            <Row style={{paddingBottom:"40px",paddingTop:"40px"}}>
+            <Row>
+              <h4>
+                Manual UI Input
+              </h4>
+            </Row>
+            <Row style={{paddingBottom:"40px"}}>
               <Col s={10} offset="s1">
                 <Input error={this.state.xError} s={6} type="number" min="1" max="25" name="xMax" onChange={this.handleInputChange} onKeyPress={this.handleEnter} label="Max X Cordinate" />
                 <Input error={this.state.yError} s={6} type="number" min="1" max="25" name="yMax" onChange={this.handleInputChange} onKeyPress={this.handleEnter} label="Max Y Cordinate" />
               </Col>
+            </Row>
+            <Row>
+              <Button className="blue lighten-3 black-text" onClick={this.handleEnter} waves='light'>Submit Raw Input</Button>
             </Row>
           </CardPanel>
         </Col>
