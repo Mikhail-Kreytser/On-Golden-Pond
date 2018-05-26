@@ -8,6 +8,7 @@ class DuckInput extends Component {
     this.state = {
       duckInstructionsError: "",
       duckInstructions: "",
+      orientationError: "",
       orientation : "N",
       xError: "",
       yError: "",
@@ -34,7 +35,7 @@ class DuckInput extends Component {
   //Handles Enter
   handleEnter(event){
     const duckInstructions = this.state.duckInstructions;
-    const orientation = this.state.orientation;
+    var orientation = this.state.orientation;
     const xMax = this.props.xMax;
     const yMax = this.props.yMax;
 
@@ -62,38 +63,61 @@ class DuckInput extends Component {
 
             //Checks if duck instructions has a error
             if(this.state.duckInstructionsError === ""){
-              this.props.submitDuck({xInit, yInit, orientation ,duckInstructions})
-              this.setState({
-                duckInstructionsError: "",
-                duckInstructions: "",
-                xError: "",
-                yError: "",
-                xInit: "",
-                yInit: "",
-              })
+
+              switch(orientation.toUpperCase()){
+                case ("NORTH"):
+                  orientation = "N"
+                  break
+                case ("EAST"):
+                  orientation = "E"
+                  break
+                case ("SOUTH"):
+                  orientation = "S"
+                  break
+                case ("WEST"):
+                  orientation = "W"
+                  break
+                default:
+                  orientation = orientation.toUpperCase()
+              }
+              if(orientation.toUpperCase() == "N" || orientation == "E"|| orientation.toUpperCase() == "S" || orientation.toUpperCase() == "W"){
+                this.props.submitDuck({xInit, yInit, orientation ,duckInstructions})
+                this.setState({
+                  duckInstructionsError: "",
+                  duckInstructions: "",
+                  orientationError:"",
+                  xError: "",
+                  yError: "",
+                  xInit: "",
+                  yInit: "",
+                })
+              }
+              else{
+                this.setState({orientationError:"N, E, S, W"})
+              }
             }
           }
           else{
             //Error msg, No Instructions
             this.setState({duckInstructionsError: "Add Instructions"})
           }
-		    }
-		    else{
+        }
+        else{
           //Error msg, Bad coordinates
-		    	this.setState({
-  					xError: (xInit >= 0 && xInit <= xMax) ? ""  : `0 <= X <= ${xMax}`,
+          this.setState({
+            xError: (xInit >= 0 && xInit <= xMax) ? ""  : `0 <= X <= ${xMax}`,
             yError: (yInit >= 0 && yInit <= yMax) ? ""  : `0 <= Y <= ${yMax}`
-				  })
-		    }
-		  } 
-  		else {
-          //Error msg, No coordinates
-  			this.setState({
-  				xError: this.state.xInit ? ""  : "Please enter a number",
-  				yError: this.state.yInit ? ""  : "Please enter a number"
-  			})
-  		}
-  	}
+          })
+        }
+		  }
+	    else{
+        //Error msg, No coordinates
+        this.setState({
+          xError: this.state.xInit ? ""  : "Please enter a number",
+          yError: this.state.yInit ? ""  : "Please enter a number"
+        })
+      }
+	  } 
   }
 
   validateDuckInstructions(event){
@@ -124,7 +148,7 @@ class DuckInput extends Component {
           <CardPanel className="blue lighten-5 black-text">
             <Row>
               <Col s={10} offset="s1">
-                <Row style={{paddingBottom:"60px",paddingTop:"60px"}}>
+                <Row style={{paddingBottom:"50px",paddingTop:"60px"}}>
                   <Input 
                     onChange={this.handleInputChange} 
                     onKeyPress={this.handleEnter} 
@@ -136,7 +160,7 @@ class DuckInput extends Component {
                     name="xInit" 
                     min="0" 
                     s={6} 
-                    />
+                  />
                   <Input 
                     onChange={this.handleInputChange} 
                     onKeyPress={this.handleEnter} 
@@ -148,14 +172,57 @@ class DuckInput extends Component {
                     name="yInit" 
                     min="0" 
                     s={6} 
-                    />
+                  />
                 </Row>
                 <Row>
-                  <Col s={8} offset="s2">
-                    <Input name='orientation' type='radio' value='N' label='North'onChange={this.handleInputChange} checked/>
-                    <Input name='orientation' type='radio' value='E' label='East' onChange={this.handleInputChange} />
-                    <Input name='orientation' type='radio' value='S' label='South'onChange={this.handleInputChange} />
-                    <Input name='orientation' type='radio' value='W' label='West' onChange={this.handleInputChange} />
+                  <Col s={4} offset="s4">
+                    <Input 
+                      onChange={this.handleInputChange} 
+                      error={this.state.orientationError} 
+                      value={this.state.orientation}
+                      onKeyPress={this.handleEnter} 
+                      style={{ textAlign:'center'}}
+                      label="Inital Orientation" 
+                      name="orientation" 
+                      maxlength={5}
+                      type="text" 
+                      min="0" 
+                      s={12} 
+                    />
+                    {
+                    // <Input 
+                    //   defaultChecked={this.state.orientation === 'N'}
+                    //   onChange={this.handleInputChange}
+                    //   name='orientation'
+                    //   label='North' 
+                    //   type='radio' 
+                    //   value='N'
+                    // />
+                    // <Input 
+                    //   defaultChecked={this.state.orientation === 'E'}
+                    //   onChange={this.handleInputChange}
+                    //   name='orientation' 
+                    //   label='East'
+                    //   type='radio'
+                    //   value='E'
+                    // />
+                    // <Input 
+                    //   defaultChecked={this.state.orientation === 'S'}
+                    //   onChange={this.handleInputChange}
+                    //   name='orientation' 
+                    //   label='South'
+                    //   type='radio' 
+                    //   value='S' 
+                    // />
+                    // <Input 
+                    //   defaultChecked={this.state.orientation === 'W'}
+                    //   onChange={this.handleInputChange}
+                    //   name='orientation' 
+                    //   label='West' 
+                    //   type='radio' 
+                    //   value='W'
+                    //   />
+                  }
                   </Col>
                 </Row>
                 <Row>
