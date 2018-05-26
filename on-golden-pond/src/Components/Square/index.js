@@ -6,7 +6,6 @@ import W from '../../Media/W.png'
 
 export class Square extends React.Component{
   render(){
-    const imgLocation = "../../Media/" + this.props.direction + ".png";    
     return (
       <td
         style={{
@@ -16,8 +15,11 @@ export class Square extends React.Component{
           backgroundColor:'#80C2FF',
           boarderColor: 'black',
           border:".5px solid black"
-        }}>
-          <img src={imgLocation} alt="" height="50" width="50"/>
+        }}>    
+          {this.props.direction ==='N' && <img src={N} alt="" height="50" width="50"/>}
+          {this.props.direction ==='E' && <img src={E} alt="" height="50" width="50"/>}
+          {this.props.direction ==='S' && <img src={S} alt="" height="50" width="50"/>}
+          {this.props.direction ==='W' && <img src={W} alt="" height="50" width="50"/>}
       </td>
     )
   }
