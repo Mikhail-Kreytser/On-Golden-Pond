@@ -10,7 +10,7 @@ class DuckCardStart extends React.Component {
         <Col s={10} m={10} offset="m1">
           <CardPanel className="blue lighten-5 black-text">
             <Row style={{paddingTop:"30px"}}>
-              <Col s={12} m={2}>
+              <Col s={12} m={3}>
                 <img src={icon} alt="" height="64" width="64"/>
                 <Button className="btn-small" onClick={()=>{this.props.play(this.props.duck)}}>
                   Play
@@ -24,7 +24,7 @@ class DuckCardStart extends React.Component {
                   Initial Orientation: ({this.props.duck.orientation})
                 </h5>
               </Col>
-              <Col s={12} m={4} style={{ textAlign:'left'}}>
+              <Col s={12} m={3} style={{ textAlign:'left'}}>
                 <p>
                   Instructions: {this.props.duck.duckInstructions}
                 </p>

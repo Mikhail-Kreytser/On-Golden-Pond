@@ -20,7 +20,6 @@ class Board extends React.Component{
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.play = this.play.bind(this);
   }
@@ -80,13 +79,8 @@ class Board extends React.Component{
     this.setState({
         grid:newGrid
     });
-    console.log(this.state.moveStepper)
   }
 
-  handleClick(y, x){
-    console.log('x:' + x)
-    console.log('y:' + y)
-  }
   render(){
     const style={
              textAlign: "center",
@@ -106,7 +100,7 @@ class Board extends React.Component{
                   <tr key={"row_"+i}>
                     {row.map((col, j) => {
                       return (
-                        <Square handleClick={()=>this.handleClick(i,j)} direction={this.state.grid[i][j]} key={i+"_"+j} />
+                        <Square direction={this.state.grid[i][j]} key={i+"_"+j} />
                           )
                         }
                       )
@@ -161,7 +155,7 @@ class Board extends React.Component{
             </p>
             {this.props.ducks.map((duck, index) =>{
               return (
-                <div>
+                <div key={index}>
                   <p>
                     {duck.xInit} {duck.yInit} {duck.orientation}
                   </p>
@@ -185,7 +179,7 @@ class Board extends React.Component{
                 duck.duckInstructions
               )
               return (
-                <div>
+                <div key={index}>
                   <p>
                     {state.error && <span>  Duck Fell off the grid ---> </span>}
                     {state.finalX} {state.finalY} {state.finalOrientation}

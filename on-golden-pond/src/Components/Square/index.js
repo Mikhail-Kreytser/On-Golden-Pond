@@ -10,16 +10,16 @@ export class Square extends React.Component{
       <td
         style={{
           overflow:'hidden',
-          width:'60px',
-          height:'60px',
+          width:'70px',
+          height:'70px',
           backgroundColor:'#80C2FF',
           boarderColor: 'black',
           border:".5px solid black"
         }}>    
-          {this.props.direction ==='N' && <img src={N} alt="" height="50" width="50"/>}
-          {this.props.direction ==='E' && <img src={E} alt="" height="50" width="50"/>}
-          {this.props.direction ==='S' && <img src={S} alt="" height="50" width="50"/>}
-          {this.props.direction ==='W' && <img src={W} alt="" height="50" width="50"/>}
+          {this.props.direction ==='N' && <img src={N} alt="" height="40" width="40"/>}
+          {this.props.direction ==='E' && <img src={E} alt="" height="40" width="40"/>}
+          {this.props.direction ==='S' && <img src={S} alt="" height="40" width="40"/>}
+          {this.props.direction ==='W' && <img src={W} alt="" height="40" width="40"/>}
       </td>
     )
   }
