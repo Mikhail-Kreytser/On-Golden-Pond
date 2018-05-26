@@ -79,7 +79,7 @@ class BoardSizeInput extends Component {
               </Col>
             </Row>
             <Row>
-              <Button className="blue lighten-3 black-text" onClick={this.handleEnter} waves='light'>Submit Raw Input</Button>
+              <Button className="blue lighten-3 black-text" onClick={this.handleEnter} waves='light'>Submit Input</Button>
             </Row>
           </CardPanel>
         </Col>
