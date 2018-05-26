@@ -24,8 +24,9 @@ class RawInput extends Component {
   }
 
   buttonClick(event){
-    var ducks = []
     var data = this.state.rawData
+    var outOfBounds = false
+    var ducks = []
 
     // Sterilize the input with the use of a regular expression
     var pattern = /^(([01][123456789]|[123456789]|[2][12345])\s([01][0123456789]|[0123456789]|[2][012345])\n)((([01][0123456789]|[0123456789]|[2][012345])\s([01][0123456789]|[0123456789]|[2][012345])\s[N|E|S|W]\n[F|S|P]+\n*)+)$/;
@@ -74,6 +75,12 @@ class RawInput extends Component {
           data = data.substring(secondNewLine+1, data.length)
         }
 
+        if(xInit > xBound || yInit > yBound){
+          this.setState({inputError: "A Duck is out of bounds."})
+          outOfBounds = true
+          break;
+        }
+
         //Create a duck
         var duck = {
           duckInstructions:duckInstructions,
@@ -88,11 +95,12 @@ class RawInput extends Component {
         //Exit if no more input
         if(secondNewLine === -1) break;
       }
-      this.props.submitDuckList(ducks,{xBound,yBound})
+      if(!outOfBounds){
+        this.props.submitDuckList(ducks,{xBound,yBound})
+      }
     }
     else{
-      this.setState({inputError: "Error with input format"})
-      console.log("Error with input format")
+      this.setState({inputError: "Error with input format. Input did not pass the regular expression test."})
     }
   }
   render() {
@@ -112,7 +120,6 @@ class RawInput extends Component {
               <Col s={10} offset="s1">
                 <Input 
                   onChange={this.handleInputChange}
-                  error={this.state.inputError}
                   type="textarea"
                   name="rawData"
                   s={12} 
@@ -120,6 +127,7 @@ class RawInput extends Component {
               </Col>
             </Row>
             <Row>
+              {this.state.inputError && <p className="red-text">{this.state.inputError}</p>}
               <Button className="blue lighten-3 black-text" onClick={this.buttonClick} waves='light'>Submit Raw Input</Button>
             </Row>
             <Row>
