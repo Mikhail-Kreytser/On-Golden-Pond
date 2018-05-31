@@ -80,7 +80,7 @@ class DuckInput extends Component {
                 default:
                   orientation = orientation.toUpperCase()
               }
-              if(orientation.toUpperCase() == "N" || orientation == "E"|| orientation.toUpperCase() == "S" || orientation.toUpperCase() == "W"){
+              if(orientation.toUpperCase() === "N" || orientation === "E"|| orientation.toUpperCase() === "S" || orientation.toUpperCase() === "W"){
                 this.props.submitDuck({xInit, yInit, orientation ,duckInstructions})
                 this.setState({
                   duckInstructionsError: "",

@@ -34,12 +34,12 @@ class RawInput extends Component {
       this.setState({inputError: ""})
 
       //Find key points to needed to parse input
-      var firstSpace = data.search(' ')
-      var firstNewLine = data.search('\n')
+      let firstSpace = data.search(' ')
+      let firstNewLine = data.search('\n')
 
       //Get X and Y size of Grid
-      var xBound = parseInt(data.substring(0,firstSpace))
-      var yBound = parseInt(data.substring(firstSpace+1,firstNewLine))
+      var xBound = parseInt(data.substring(0,firstSpace), 10)
+      var yBound = parseInt(data.substring(firstSpace+1,firstNewLine), 10)
 
       //Remove Grid X and Y from data string
       data = data.substring(firstNewLine+1, data.length)
@@ -48,23 +48,23 @@ class RawInput extends Component {
       while(data.length > 0){
 
         //Find key points to needed to parse input
-        var firstSpace = data.search(' ')
-        var firstNewLine = data.search('\n')
+        let firstSpace = data.search(' ')
+        let firstNewLine = data.search('\n')
 
         //Get X of duck
-        var xInit = parseInt(data.substring(0,firstSpace))
+        let xInit = parseInt(data.substring(0,firstSpace), 10)
         data = data.substring(firstSpace+1, data.length)
 
         //Get Y of duck
-        var secondSpace = data.search(' ')
-        var yInit = parseInt(data.substring(0,secondSpace))
+        let secondSpace = data.search(' ')
+        let yInit = parseInt(data.substring(0,secondSpace), 10)
 
         //Get orientation of duck
-        var orientation = data.substring(secondSpace+1,secondSpace+2)
+        let orientation = data.substring(secondSpace+1,secondSpace+2)
         data = data.substring(firstNewLine-1, data.length)
 
-        var duckInstructions
-        var secondNewLine = data.search('\n')
+        let duckInstructions
+        let secondNewLine = data.search('\n')
 
         //If no more input, duckInstructions is read untill the end of data
         //If more input is avalible remove recorded data

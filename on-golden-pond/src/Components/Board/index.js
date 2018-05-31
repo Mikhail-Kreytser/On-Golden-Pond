@@ -1,10 +1,11 @@
 import { Row, Col, Input } from 'react-materialize'
 import DuckCardStart from '../DuckCardStart'
+import DuckRawOutput from '../DuckRawOutput'
+import DuckRawInput from '../DuckRawInput'
 import { computeMove } from '../Functions'
 import DuckCardEnd from '../DuckCardEnd'
-import Slider from 'react-rangeslider'
-import { Square } from '../Square';
-import React from 'react';
+import { Square } from '../Square'
+import React from 'react'
 
 class Board extends React.Component{
   constructor(props){
@@ -43,11 +44,18 @@ class Board extends React.Component{
 
     //Calculate the rest of the positions for the duck that is going to be played
     for(var i = 0; i < duck.duckInstructions.length; i++){
-      var output = computeMove(this.props.xBound, this.props.yBound, currentX, currentY ,currentOrientation, duckInstructions.substring(i,i+1), true);
+      var output = computeMove(this.props.xBound, this.props.yBound, currentX, currentY ,currentOrientation, duckInstructions.substring(i,i+1));
+
+      //If the duck fell off the map stop calculating moves
+      if(output.error){
+        break;
+      }
+
       currentOrientation = output.finalOrientation;
       currentX = output.finalX;
       currentY = output.finalY;
       duckMoves = duckMoves.concat(output);
+
     }
 
     //Save all the moves to State and then draw the inital position of the duck
@@ -80,7 +88,7 @@ class Board extends React.Component{
     if(value >= 0 && value < this.state.duckMoves.length && value !== ""){
       //If it does, set the new move selection to state then Draw the move 
       this.setState({
-          [name]: value
+          [name]: parseInt(value,10)
       },this.drawRubberDucky);
 
     }else {
@@ -127,19 +135,20 @@ class Board extends React.Component{
             this.state.duckMoves.length > 0 && 
             <Col s={4} offset="s4">
               <Input 
-                style={{ textAlign:'center'}}
-                onInput={this.handleInputChange} 
-                label="View each step" 
                 error={this.state.moveStepperError} 
-                value={this.state.moveStepper}
                 max={this.state.duckMoves.length-1} 
-                type="number" 
+                onInput={this.handleInputChange} 
+                value={this.state.moveStepper}
+                style={{ textAlign:'center'}}
+                label="View each step" 
                 name="moveStepper" 
+                autoFocus={true}
+                type="number" 
                 min="0" 
                 s={12} 
                 />
             </Col>
-          }
+          } 
         </Row>
         <Row>
           <Col s={12} l={6}>
@@ -173,15 +182,7 @@ class Board extends React.Component{
             </p>
             { // Shows the Raw Input of the ducks
               this.props.ducks.map((duck, index) =>{
-              return (
-                <div key={index}>
-                  <p>
-                    {duck.xInit} {duck.yInit} {duck.orientation}
-                  </p>
-                  <p>  
-                    {duck.duckInstructions}
-                  </p>
-                </div>)
+                return <DuckRawInput key={index} duck={duck} />
               })
             }
           </Col>
@@ -191,23 +192,7 @@ class Board extends React.Component{
             </h2>
             {// Shows the Raw Output of the ducks
               this.props.ducks.map((duck, index) =>{
-                // Calculates the final position of the ducks
-                const state = computeMove(
-                  this.props.xBound,
-                  this.props.yBound,
-                  duck.xInit, 
-                  duck.yInit, 
-                  duck.orientation, 
-                  duck.duckInstructions
-                )
-                return (
-                  <div key={index}>
-                    <p>
-                      {state.error && <span>  Duck Fell off the grid ---> </span>}
-                      {state.finalX} {state.finalY} {state.finalOrientation}
-                    </p>
-                  </div>
-                )
+                return <DuckRawOutput key={index} duck={duck} xBound={this.props.xBound} yBound={this.props.yBound}/>
               })
             }
           </Col>

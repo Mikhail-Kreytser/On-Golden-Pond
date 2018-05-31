@@ -1,4 +1,4 @@
-import {Col, CardPanel, Row, Button} from 'react-materialize'
+import {Col, CardPanel, Row} from 'react-materialize'
 import { computeMove } from '../Functions'
 import icon from '../../Media/Icon.png'
 import React from 'react'
